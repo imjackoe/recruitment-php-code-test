@@ -9,10 +9,15 @@ class ComposerStaticInitaa3e3a42d9650960c63fb627a7234031
     public static $files = array (
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        't' => 
+        array (
+            'think\\' => 6,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -31,6 +36,8 @@ class ComposerStaticInitaa3e3a42d9650960c63fb627a7234031
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
         ),
@@ -46,6 +53,12 @@ class ComposerStaticInitaa3e3a42d9650960c63fb627a7234031
     );
 
     public static $prefixDirsPsr4 = array (
+        'think\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/topthink/think-log/src',
+            1 => __DIR__ . '/..' . '/topthink/think-helper/src',
+            2 => __DIR__ . '/..' . '/topthink/think-container/src',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -63,6 +76,14 @@ class ComposerStaticInitaa3e3a42d9650960c63fb627a7234031
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'Prophecy\\' => 
         array (
@@ -87,8 +108,12 @@ class ComposerStaticInitaa3e3a42d9650960c63fb627a7234031
     );
 
     public static $classMap = array (
-        'App\\Service\\Logger' => __DIR__ . '/../..' . '/src/Service/Logger.php',
+        'App\\Service\\AppLogger' => __DIR__ . '/../..' . '/src/Service/AppLogger.php',
+        'App\\Service\\Common' => __DIR__ . '/../..' . '/src/Service/Common.php',
         'App\\Service\\ProductHandler' => __DIR__ . '/../..' . '/src/Service/ProductHandler.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Demo' => __DIR__ . '/../..' . '/src/App/Demo.php',
+        'HttpRequest' => __DIR__ . '/../..' . '/src/App/Demo.php',
         'Logger' => __DIR__ . '/..' . '/apache/log4php/src/main/php/Logger.php',
         'LoggerAppender' => __DIR__ . '/..' . '/apache/log4php/src/main/php/LoggerAppender.php',
         'LoggerAppenderConsole' => __DIR__ . '/..' . '/apache/log4php/src/main/php/appenders/LoggerAppenderConsole.php',
