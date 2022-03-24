@@ -63,6 +63,39 @@ class ProductHandlerTest extends TestCase
             $totalPrice += $price;
         }
 
-        $this->assertEquals(143, $totalPrice);
+       // $this->assertEquals(143, $totalPrice);
+        $productHandler = new ProductHandler();
+        $this->assertEquals(143, $productHandler->getTotalPrice($this->products));
+    }
+
+    public function testGetSortPrice()
+    {
+        $expectProducts = [
+            [
+                'id' => 5,
+                'name' => 'New York Cheese Cake',
+                'type' => 'Dessert',
+                'price' => 40,
+                'create_at' => '2021-04-19 14:38:00',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Cup cake',
+                'type' => 'Dessert',
+                'price' => 35,
+                'create_at' => '2021-04-18 08:45:00',               
+            ]
+        ];
+
+        $productHandler = new ProductHandler();
+        $result = $productHandler->getSortPrice($this->products, "type", "Dessert");
+        $this->assertEquals($expectProducts, $result); 
+    }
+
+    public function testFormatToUnixTimeStamp()
+    {
+        $productHandler = new ProductHandler();
+        $result =  $productHandler->formatToUnixTimeStamp($this->products, "create_at");
+        $this->assertNotEmpty($result);
     }
 }

@@ -12,6 +12,12 @@ class Common
     protected static $debug;
 
     /**
+    * $address 是否为空
+    * set cache  redisx()->set($cackeKey, $user_location); 加个过期时间
+    * redisx 不清楚是哪个包。设置缓存内容最好序列化
+    * get_merchant_address 考虑是否需要缓存
+    */
+    /**
      * geo helper 地址转换为坐标
      * @param $address
      * @return bool|string
@@ -75,6 +81,10 @@ class Common
         }
     }
 
+/**
+* infoLog 记录下具体是什么 $status
+* $open_status_arr = ['901' => 1, '902' => 2, '903' => 3];  status值是否一定为这几个 最好加个 isset验证下key是否存在
+*/
     // 回调状态过滤
     public static function checkStatusCallback($order_id, $status)
     {
