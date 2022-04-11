@@ -57,12 +57,15 @@ class ProductHandlerTest extends TestCase
 
     public function testGetTotalPrice()
     {
-        $totalPrice = 0;
-        foreach ($this->products as $product) {
-            $price = $product['price'] ?: 0;
-            $totalPrice += $price;
-        }
+        $this->assertEquals(143, ProductHandler::countAllPrice($this->products));
+    }
 
-        $this->assertEquals(143, $totalPrice);
+    public function testOrderProduct(){
+        print_r(ProductHandler::sortAndGroup($this->products));
+        print_r(ProductHandler::sortAndGroup($this->products,'Dessert'));
+    }
+
+    public function testTransformTime(){
+        print_r(ProductHandler::transformTime($this->products));
     }
 }

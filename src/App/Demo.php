@@ -1,4 +1,5 @@
 <?php
+
 class HttpRequest {
     function get($url) {
         $ch = curl_init($url);
@@ -9,6 +10,7 @@ class HttpRequest {
         return $result;
     }
 }
+
 class Demo {
     private $_logger;
     private $_req;
@@ -28,7 +30,7 @@ class Demo {
         $result_arr = json_decode($result, true);
         if (in_array('error', $result_arr) && $result_arr['error'] == 0) {
             if (in_array('data', $result_arr)) {
-                return $result_arr['data']
+                return $result_arr['data'];
             }
         } else {
             $this->_logger->error("fetch data error.");

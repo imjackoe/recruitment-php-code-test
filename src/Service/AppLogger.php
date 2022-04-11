@@ -2,31 +2,39 @@
 
 namespace App\Service;
 
-class AppLogger
+abstract class AppLogger
 {
-    const TYPE_LOG4PHP = 'log4php';
+    /**
+     * 打印信息日志
+     * @param $message
+     * @return mixed
+     */
+    abstract function info($message = '');
 
-    private $logger;
+    /**
+     * 调试信息
+     * @param $message
+     * @return mixed
+     */
+    abstract function debug($message = '');
 
-    public function __construct($type = self::TYPE_LOG4PHP)
+    /**
+     * 错误信息
+     * @param $message
+     * @return mixed
+     */
+    abstract function error($message = '');
+
+
+    public static function getInstance($className)
     {
-        if ($type == self::TYPE_LOG4PHP) {
-            $this->logger = \Logger::getLogger("Log");
-        }
-    }
+        $className = ucfirst(trim($className));
+        $classFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'interface' . DIRECTORY_SEPARATOR . $className . ".php";
+        if (!file_exists($classFile))
+            exit("Logger file $classFile is not exist");
+        include_once($classFile);
 
-    public function info($message = '')
-    {
-        $this->logger->info($message);
-    }
-
-    public function debug($message = '')
-    {
-        $this->logger->debug($message);
-    }
-
-    public function error($message = '')
-    {
-        $this->logger->error($message);
+        $cl = new \ReflectionClass($className);
+        return $cl->newInstance();
     }
 }
