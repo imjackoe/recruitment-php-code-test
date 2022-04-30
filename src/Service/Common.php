@@ -43,6 +43,9 @@ class Common
 
             if ($response['error'] == 0) {
                 responseLog('Backend', 'phpgeohelper\\Geocoding->hksf_addresses', 'https://geo-helper-hostr.ks-it.co', '200', '0',  $response);
+                ##########################
+                ######no need define new var
+                #########################
                 $data = $response['data'][0];
                 $coordinate = $data['coordinate'];
 
@@ -53,6 +56,11 @@ class Common
                         $sMerchant = new Merchant();
                         $res = $sMerchant->get_merchant_address($merchant_id);
                         $user_location = $res['latitude'] . ',' . $res['longitude'];
+
+                        ##########################
+                        ######shuould set cache
+                        #########################
+
                         return $user_location;
                     }
                     infoLog('geoHelper->hksf_addresses change failed === merchant_id is null' . $merchant_id);
@@ -78,8 +86,16 @@ class Common
     // 回调状态过滤
     public static function checkStatusCallback($order_id, $status)
     {
+        ##########################
+        ######防止异常参数越界
+        #########################
+        if (in_array($status, ['900','901','902','903','909','915','916'])) {
+            infoLog('checkStatusCallback backend code is 909 915 916');
+            return 0;
+        }
+
         // 是900 可以回调
-        if ($status == 900) {
+        if ($status === 900) {
             return 1;
         }
         // backend状态为 909 915 916 时 解锁工作单 但不回调
