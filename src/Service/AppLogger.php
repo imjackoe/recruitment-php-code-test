@@ -2,31 +2,22 @@
 
 namespace App\Service;
 
+use App\Service\loggerCommon\Log4Php;
+use App\Service\loggerCommon\ThinkLog;
+
 class AppLogger
 {
     const TYPE_LOG4PHP = 'log4php';
+    const TYPE_THINK_LOG = 'thinkLog';
 
-    private $logger;
+    public $logger;
 
     public function __construct($type = self::TYPE_LOG4PHP)
     {
-        if ($type == self::TYPE_LOG4PHP) {
-            $this->logger = \Logger::getLogger("Log");
-        }
-    }
-
-    public function info($message = '')
-    {
-        $this->logger->info($message);
-    }
-
-    public function debug($message = '')
-    {
-        $this->logger->debug($message);
-    }
-
-    public function error($message = '')
-    {
-        $this->logger->error($message);
+        $logArr = array(
+            self::TYPE_LOG4PHP => new Log4Php(),
+            self::TYPE_THINK_LOG => new ThinkLog(),
+        );
+        $this->logger = $logArr[$type] ?? $logArr[self::TYPE_LOG4PHP];
     }
 }
