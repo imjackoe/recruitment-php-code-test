@@ -93,3 +93,19 @@ class Common
         return $order_id.'-'.$open_status_arr[$status];
     }
 }
+ /**
+  * 代码评审
+  */
+ /*
+  1. geoHelperAddress(),地址转坐标方法
+     a.如果地址数据数量不多，redis缓存可以用地址+商家id作为key，当地址查不到情况下根据商家id去查也可以直接读取缓存，另外redis的key应该设置缓存时间，
+       提前制定合理的内存优化策略，防止造成内存泄漏和性能下降问题。
+     b.如果地址数据数量过多，地址不应该缓存，商家id可以作为redis的key。
+     c.日志不规范，没有统一的关键字
+     d. response响应数据应该增加状态码
+
+ 2.checkStatusCallback(),回调状态过滤
+   a. 应该定义相对应的响应状态码code，如可以回调不解锁，回调解锁，不可以回调。
+   b. 定义一个状态码常量数组，整合状态码。
+   c. status有可能除了以上的其他值，直接用$open_status_arr[$status]可能会报错，可以用switch case枚举。
+ */
