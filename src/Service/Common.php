@@ -74,6 +74,15 @@ class Common
             return 0;
         }
     }
+/* 、
+代码评审
+1、直接使用地址作redis的key不科学，可以用地址字符md5后做key，或者前缀加商家ID作key。
+2、redis未设置过期时间，凡是缓存都需要设置过期时间以避免无用数据长期占用内存。
+3、返回值不科学，可以使用状态码加数据返回
+4、在使用商家ID获取到坐标后没有写进缓存
+5、'-999,-999'可定义为常量
+7、该方法拆分为两个方法会更优，方法一只有地址参数，根据地址返回坐标；方法二只有商家ID参数，外部先调用方法一返回失败状态码后再调用方法二
+ * */
 
     // 回调状态过滤
     public static function checkStatusCallback($order_id, $status)
@@ -92,4 +101,11 @@ class Common
         $open_status_arr = ['901' => 1, '902' => 2, '903' => 3];
         return $order_id.'-'.$open_status_arr[$status];
     }
+    /* 、
+代码评审
+1、应该定义一个枚举类，解锁工作单 不回调状态码 放到一个枚举方法中
+2、$open_status_arr应做成一个常量数组；
+3、方法的返回值不规范，可以使用状态码加数据返回
+4、$open_status_arr[$status]可能会不存在而报错，保险起见可以先判断$status和$open_status_arr[$status]是否存在不为空
+ * */
 }
